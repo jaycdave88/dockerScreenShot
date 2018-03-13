@@ -9,7 +9,7 @@ start="$@"
 
 port=$(env | grep _TCP_PORT | cut -d = -f 2)
 
-sleep 10
+sleep 30
 
 final=${start/dockerhost/$DOCKERHOST}
 
