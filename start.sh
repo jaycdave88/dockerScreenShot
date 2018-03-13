@@ -11,4 +11,4 @@ port=$(env | grep _TCP_PORT | cut -d = -f 2)
 
 final=${start/dockerhost/$DOCKERHOST}
 
-/wkhtmltox/bin/wkhtmltoimage ${final}
+/usr/local/bin/webkit2png ${final}

@@ -1,9 +1,14 @@
-FROM ubuntu:16.04
+# minmal Ubuntu 16.04
+FROM phusion/baseimage:latest
 
-RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get -y install libxrender1 fontconfig xvfb build-essential xorg libssl-dev libxrender-dev wget
+# headless browser 
+RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential xorg libssl-dev libxrender-dev wget
 
-RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
-    tar xf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+# downloading and setting webkit2png file
+RUN wget https://raw.github.com/paulhammond/webkit2png/master/webkit2png -P /usr/local/bin 
+
+# giving permissions
+RUN chmod a+x /usr/local/bin/webkit2png 
 
 ADD ./start.sh /start.sh
 
