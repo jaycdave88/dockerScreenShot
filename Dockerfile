@@ -1,17 +1,8 @@
-# minmal Ubuntu 16.04
-FROM phusion/baseimage:latest
+FROM ubuntu:14.04
 
-# headless browser 
-RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential xorg libssl-dev libxrender-dev wget
-
-# downloading and setting webkit2png file
-RUN wget https://raw.github.com/paulhammond/webkit2png/master/webkit2png -P /usr/local/bin 
-
-# giving permissions
-RUN chmod a+x /usr/local/bin/webkit2png 
+RUN apt-get update -y && apt-get -y install python-qt4 libqt4-webkit xvfb python-pip && pip install webkit2png
 
 ADD ./start.sh /start.sh
-
 RUN chmod +x /start.sh
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/usr/bin/python2.7"]
