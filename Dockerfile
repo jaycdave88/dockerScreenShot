@@ -1,8 +1,8 @@
-FROM ubuntu:14.04
+FROM scratch
+MAINTAINER Jay Dave <jay.dave@datadoghq.com>
 
-RUN apt-get update -y && apt-get -y install python-qt4 libqt4-webkit xvfb python-pip && pip install webkit2png
+RUN apt-get update && apt-get install -y \
+	wkhtmltopdf-dbg \
+	xvfb-run
 
-ADD ./start.sh /start.sh
-RUN chmod +x /start.sh
-
-ENTRYPOINT ["/usr/bin/python2.7"]
+ENTRYPOINT ['/usr/bin/xvfb-run --server-args="-screen 0, 1920x1080x24"']
