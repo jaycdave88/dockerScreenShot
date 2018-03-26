@@ -1,8 +1,9 @@
-FROM scratch
-MAINTAINER Jay Dave <jay.dave@datadoghq.com>
+FROM debian
 
-RUN apt-get update && apt-get install -y \
-	wkhtmltopdf-dbg \
-	xvfb-run
+RUN apt-get update -y
+RUN apt-get -y install wkhtmltopdf-dbg
+RUN apt-get -y install xvfb
 
-ENTRYPOINT ['/usr/bin/xvfb-run --server-args="-screen 0, 1920x1080x24"']
+RUN su root
+
+RUN /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 https://p.datadoghq.com/sb/rklUvX-4e920a9b3350900a4d4344c17384d761 google.png
