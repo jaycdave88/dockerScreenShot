@@ -4,6 +4,12 @@ RUN apt-get update -y
 RUN apt-get -y install wkhtmltopdf-dbg
 RUN apt-get -y install xvfb
 
-RUN su root
+RUN chmod 755 /usr/bin/wkhtmltopdf
+RUN chmod 755 /usr/bin/wkhtmltoimage
 
-RUN /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 https://p.datadoghq.com/sb/rklUvX-4e920a9b3350900a4d4344c17384d761 google.png
+# Add start script
+ADD start.sh /usr/bin/start.sh
+RUN chmod 755 /usr/bin/start.sh
+
+# Execute start script to keep container running
+CMD [ "/usr/bin/start.sh" ]
