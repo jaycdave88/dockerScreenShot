@@ -1,12 +1,23 @@
-attachments = [''] # filepath to the screenshot you want to send
+#!/usr/bin/env python
 
-username = ''
-password = ''
-host = 'smtp.gmail.com:587' # specify port, if required, using this notation
+import smtplib, os, sys
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email import encoders
+from html.parser import HTMLParser
 
-fromaddr = '' # must be a vaild 'from' address in your GApps account
-toaddr  = '' # email or distro list who you want to get this email
-replyto = fromaddr # unless you want a different reply-to
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+FROM_ADDRESS = os.environ.get('FROM_ADDRESS')
+SMTP_ADDRESS = os.environ.get('SMTP_ADDRESS')
+SUBJECT = os.environ.get('SUBJECT')
+TO_ADDRESS = os.environ.get('TO_ADDRESS')
+
+print(EMAIL_PASSWORD)
+print(FROM_ADDRESS)
+print(TO_ADDRESS)
+
+attachments = ['/tmp/google.png'] # filepath to the screenshot you want to send
 
 msgsubject = 'Here is your weekly overview from Datadog'
 
@@ -16,20 +27,13 @@ htmlmsgtext = """<h2>Header</h2>
                  </p>
                 
                 <p><strong>Here are your attachments:</strong></p><br />"""
-
 ######### In normal use nothing changes below this line ###############
-
-import smtplib, os, sys
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email import Encoders
-from HTMLParser import HTMLParser
 
 # A snippet - class to strip HTML tags for the text version of the email
 
 class MLStripper(HTMLParser):
     def __init__(self):
+        super().__init__()
         self.reset()
         self.fed = []
     def handle_data(self, d):
@@ -65,28 +69,29 @@ try:
             f = filename
             part = MIMEBase('application', "octet-stream")
             part.set_payload( open(f,"rb").read() )
-            Encoders.encode_base64(part)
+            encoders.encode_base64(part)
             part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f))
             msg.attach(part)
 
-    msg.add_header('From', fromaddr)
-    msg.add_header('To', toaddr)
-    msg.add_header('Subject', msgsubject)
-    msg.add_header('Reply-To', replyto)
+    msg.add_header('From', FROM_ADDRESS)
+    msg.add_header('To', TO_ADDRESS)
+    msg.add_header('Subject', SUBJECT)
+    msg.add_header('Reply-To', FROM_ADDRESS)
 
     # The actual email delivery
-    server = smtplib.SMTP(host)
+    server = smtplib.SMTP(SMTP_ADDRESS)
     server.set_debuglevel(False) # set to True for verbose output
     try:
         # gmail expect tls
         server.starttls()
-        server.login(username,password)
+        server.login(FROM_ADDRESS,EMAIL_PASSWORD)
         server.sendmail(msg['From'], [msg['To']], msg.as_string())
+        print ([msg['To']])
         print ('Email sent')
         server.quit() # bye
     except:
         # if tls is set for non-tls servers you would have raised an exception, so....
-        server.login(username,password)
+        server.login(FROM_ADDRESS,EMAIL_PASSWORD)
         server.sendmail(msg['From'], [msg['To']], msg.as_string())
         print ('Email sent')
         server.quit() # sbye bye        
