@@ -12,7 +12,7 @@ _Run commands_:
 
 2. Once everything has been downloaded, run the following command:
 
-    ```docker container exec JJA1 /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 "[LINK_TO_PUBLIC_URL]" /tmp/google.png; docker container exec JJA1 python3 /usr/bin/dd-email.py```
+    ```docker container exec [PROVIDE_CONTAINER_NAME_ALIAS_WHICH_WAS_DEFINED_ABOVE_IN_STEP_1] /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 "[LINK_TO_PUBLIC_URL]" /tmp/google.png; docker container exec JJA1 python3 /usr/bin/dd-email.py```
     
 (***NOTE***: All items noted above surrounded with `[ ]` will need to be replaced with appropriate fields.)
 
