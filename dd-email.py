@@ -12,8 +12,9 @@ FROM_ADDRESS = os.environ.get('FROM_ADDRESS')
 SMTP_ADDRESS = os.environ.get('SMTP_ADDRESS')
 SUBJECT = os.environ.get('SUBJECT')
 TO_ADDRESS = os.environ.get('TO_ADDRESS')
+SAVE_LOCATION = os.environ.get('SAVE_LOCATION')
 
-attachments = ['/tmp/google.png'] # filepath to the screenshot you want to send
+attachments = [SAVE_LOCATION] # filepath to the screenshot you want to send
 msgsubject = 'Here is your weekly overview from Datadog'
 htmlmsgtext = """<h2>Header</h2>
                 <p>\

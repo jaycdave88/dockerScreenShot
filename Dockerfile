@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:stretch
 MAINTAINER Jay Davé <jay.dave@datadoghq.com>
 
 RUN apt-get update -y
