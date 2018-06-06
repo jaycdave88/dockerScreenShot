@@ -2,7 +2,7 @@ FROM debian:stretch
 MAINTAINER Jay Davé <jay.dave@datadoghq.com>
 
 RUN apt-get update -y
-RUN apt-get -y install python3
+#RUN apt-get -y install python3
 RUN apt-get -y install wkhtmltopdf-dbg 
 RUN apt-get -y install xvfb
 
