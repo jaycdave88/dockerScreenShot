@@ -18,4 +18,4 @@ RUN chmod 755 /usr/bin/start.sh
 #RUN chmod 755 /usr/bin/dd-email.py
 
 # Execute start script to keep container running
-#CMD [ "/usr/bin/start.sh" ]
+CMD [ "/usr/bin/start.sh" ]
