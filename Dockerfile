@@ -5,7 +5,6 @@ RUN apt-get update -y
 #RUN apt-get -y install python3
 RUN apt-get -y install wkhtmltopdf-dbg 
 RUN apt-get -y install xvfb
-RUN apt-get -y install xserver
 
 RUN chmod 755 /usr/bin/wkhtmltopdf
 RUN chmod 755 /usr/bin/wkhtmltoimage
