@@ -8,12 +8,6 @@ RUN apt-get -y install xvfb
 RUN chmod 755 /usr/bin/wkhtmltopdf
 RUN chmod 755 /usr/bin/wkhtmltoimage
 
-# Create a mount point dir
-RUN mkdir /myvol
-
 # Add start script
 ADD start.sh /usr/bin/start.sh
 RUN chmod 755 /usr/bin/start.sh
-
-# Mount point
-VOLUME /myvol
