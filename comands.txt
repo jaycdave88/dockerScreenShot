@@ -1,0 +1,6 @@
+docker run -d --env FROM_ADDRESS=developerjaycdave@gmail.com --env EMAIL_PASSWORD=Zumiez2136431$! --env SUBJECT="This is an example of a subject" --env TO_ADDRESS=jay.dave@datadoghq.com --env SAVE_LOCATION="/etc/test.png" --env SMTP_ADDRESS=smtp.gmail.com:587 --name greentea jaycdave88/dockerscreenshot
+
+docker container exec greentea /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 "https://p.datadoghq.com/sb/rklUvX-9802ee27da3cbae1e0b5c54e6655371c" "/etc/test.png"; docker container exec greetea python3 /usr/bin/dd-email.py
+
+
+docker container exec -it greentea /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 "https://p.datadoghq.com/sb/rklUvX-9802ee27da3cbae1e0b5c54e6655371c" "/etc/test.png"; docker container exec greetea python3 /usr/bin/dd-email.py
