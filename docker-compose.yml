@@ -15,10 +15,21 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile-nginx
+    links:
+      - db
     ports:
       - 5000:6379
     depends_on:
       - flask
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "32000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
 
   # screenshot:
   #   build: 
@@ -26,3 +37,5 @@ services:
   #     dockerfile: Dockerfile
   #   env_file:
   #     - ./screenshot/hush.env
+  #   depends_on:
+  #     - flask
