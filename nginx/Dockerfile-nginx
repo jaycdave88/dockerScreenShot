@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.16.0
 
 # Nginx will listen on this port
 EXPOSE 80

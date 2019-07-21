@@ -7,12 +7,12 @@ from email.mime.text import MIMEText
 from email import encoders
 from html.parser import HTMLParser
 
-EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-FROM_ADDRESS = os.environ.get('FROM_ADDRESS')
-SMTP_ADDRESS = os.environ.get('SMTP_ADDRESS')
-SUBJECT = os.environ.get('SUBJECT')
-TO_ADDRESS = os.environ.get('TO_ADDRESS')
-SAVE_LOCATION = os.environ.get('SAVE_LOCATION')
+# EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+# FROM_ADDRESS = os.environ.get('FROM_ADDRESS')
+# SMTP_ADDRESS = os.environ.get('SMTP_ADDRESS')
+# SUBJECT = os.environ.get('SUBJECT')
+# TO_ADDRESS = os.environ.get('TO_ADDRESS')
+# SAVE_LOCATION = os.environ.get('SAVE_LOCATION')
 
 attachments = [SAVE_LOCATION] # filepath to the screenshot you want to send
 msgsubject = 'Here is your weekly overview from Datadog'

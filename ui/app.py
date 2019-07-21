@@ -2,9 +2,11 @@ from flask import Flask, render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from typing import List, Dict
 import mysql.connector
+import requests
+import urllib.request
 
 DEBUG = True
-app = Flask(__name__, template_folder="./flask/templates/")
+app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = 'SjdnUends821Jsdlkvxh391ksdODnejdDw'
 
@@ -45,9 +47,19 @@ def hello():
             write_to_db(to_addr, subject, from_addr, password, dd_public_dashboard_url)
             flash('Collected info: {} {} {} {}'.format(to_addr, subject, from_addr, dd_public_dashboard_url))
         else:
-            flash('Error: All Fields are Required')
+            flash('Error: All Fields are Required') 
 
     return render_template('index.html', form=form)
 
+@app.route("/proxy")
+def proxy():
+    # contents = urllib.request.urlopen("http://example.com/foo/bar").read()
+    requests.get('http://192.168.208.4:8080/test')
+    # return Response(
+    #     r.text,
+    #     status=r.status_code,
+    #     content_type=r.headers['content-type']
+    # ) 
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, host='0.0.0.0')
