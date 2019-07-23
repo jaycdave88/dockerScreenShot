@@ -1,16 +1,15 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-import test
+import order
 
 app = Flask(__name__)
 api = Api(app)
 
+class control_flow(Resource):
+	def get(self):
+		return {'data': order.execute_commands()}, 200
 
-class testclass(Resource):
-	def get(self, first_number,second_number):
-		return {'data': test.run_test(first_number,second_number)}
-
-api.add_resource(testclass, '/test/<first_number>/<second_number>')
+api.add_resource(control_flow, '/execute')
 
 if __name__ == '__main__':
     app.run()

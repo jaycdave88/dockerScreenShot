@@ -21,6 +21,7 @@ RUN pip3 install -r requirements.txt
 
 RUN chmod 755 /usr/bin/wkhtmltopdf
 RUN chmod 755 /usr/bin/wkhtmltoimage
+RUN chmod 777 /app
 
 COPY . .
 
