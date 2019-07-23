@@ -3,7 +3,6 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from typing import List, Dict
 import mysql.connector
 import requests
-import urllib.request
 
 DEBUG = True
 app = Flask(__name__)
@@ -54,12 +53,10 @@ def hello():
 @app.route("/proxy")
 def proxy():
     # contents = urllib.request.urlopen("http://example.com/foo/bar").read()
-    requests.get('http://192.168.208.4:8080/test')
-    # return Response(
-    #     r.text,
-    #     status=r.status_code,
-    #     content_type=r.headers['content-type']
-    # ) 
+    r = requests.get('http://backend:8080/execute')
+    res = r.json()
+    return res
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
