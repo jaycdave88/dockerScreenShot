@@ -17,7 +17,6 @@ class ReusableForm(Form):
     dd_public_dashboard_url = TextField('Public Dashboard URL:')
 
 def write_to_db(to_addr,subject,from_addr,password,dd_public_dashboard_url) -> List[Dict]:
-    print("hi alex look here")
     config = {
         'user': 'root',
         'password': 'root',
@@ -42,7 +41,6 @@ def startup():
         from_addr=request.form['from_address']
         password=request.form['password']
         dd_public_dashboard_url=request.form['dd_public_dashboard_url']
-        print("Hi Jay")
         if form.validate():
             write_to_db(to_addr, subject, from_addr, password, dd_public_dashboard_url)
             stage_2()
