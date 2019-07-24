@@ -1,4 +1,4 @@
-import subprocess
+import os
 import mysql.connector
 
 to_addr =""
@@ -42,10 +42,13 @@ def read_db_values():
 	return user_value
 
 def execute_shell_cmd(user_value):
-	gen_image = "/usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 '{}' /test.png".format(user_value['dd_public_dashboard_url'])
-	print(gen_image)
-	subprocess.run([gen_image])
-	print("ran process")
+	try:
+		gen_image = 'echo "hello alex" > test.txt'
+		os.system(gen_image)
+	except Exception as e:
+		raise e
+	# gen_image = "sudo /usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 '{}' /test.png".format(user_value['dd_public_dashboard_url'])
+
 
 def execute_commands():
 	user_value = read_db_values()

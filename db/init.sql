@@ -10,8 +10,3 @@ CREATE TABLE emailer_info (
   dd_public_dashboard_url VARCHAR(255),
   PRIMARY KEY(id)
 );
-
-INSERT INTO emailer_info
-  (to_addr, subject, from_addr, password, dd_public_dashboard_url)
-VALUES
-  ('test@test.com', 'testing ', 'tester@tester.com', 'm8ff', 'www.google.com');
