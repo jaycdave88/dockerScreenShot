@@ -17,6 +17,7 @@ class ReusableForm(Form):
     dd_public_dashboard_url = TextField('Public Dashboard URL:')
 
 def write_to_db(to_addr,subject,from_addr,password,dd_public_dashboard_url) -> List[Dict]:
+    print("hi alex look here")
     config = {
         'user': 'root',
         'password': 'root',
@@ -32,7 +33,7 @@ def write_to_db(to_addr,subject,from_addr,password,dd_public_dashboard_url) -> L
     connection.close()
 
 @app.route("/", methods=['GET', 'POST'])
-def hello():
+def startup():
     form = ReusableForm(request.form)
 
     if request.method == 'POST':
@@ -41,21 +42,25 @@ def hello():
         from_addr=request.form['from_address']
         password=request.form['password']
         dd_public_dashboard_url=request.form['dd_public_dashboard_url']
-
+        print("Hi Jay")
         if form.validate():
             write_to_db(to_addr, subject, from_addr, password, dd_public_dashboard_url)
+            stage_2()
             flash('Collected info: {} {} {} {}'.format(to_addr, subject, from_addr, dd_public_dashboard_url))
         else:
             flash('Error: All Fields are Required') 
 
     return render_template('index.html', form=form)
 
-@app.route("/proxy")
-def proxy():
+@app.route("/init")
+def stage_2():
     # contents = urllib.request.urlopen("http://example.com/foo/bar").read()
-    r = requests.get('http://backend:8080/execute')
-    res = r.json()
-    return res
+    try:
+        requests.get('http://backend:8080/hydrate').json()
+    except Exception as e:
+        raise e
+    finally:
+        return "okay"
 
 
 if __name__ == "__main__":
