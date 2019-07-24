@@ -82,13 +82,11 @@ for recipient in parsed_recipients:
             server.starttls()
             server.login(FROM_ADDRESS,EMAIL_PASSWORD)
             server.sendmail(msg['From'], [msg['To']], msg.as_string())
-            print ('Email sent')
             server.quit() # bye
         except:
             # if tls is set for non-tls servers you would have raised an exception, so....
             server.login(FROM_ADDRESS,EMAIL_PASSWORD)
             server.sendmail(msg['From'], [msg['To']], msg.as_string())
-            print ('Email sent')
             server.quit() # sbye bye        
     except:
         print ('Email NOT sent to %s successfully. %s ERR: %s %s %s ', str(toaddr), 'tete', str(sys.exc_info()[0]), str(sys.exc_info()[1]), str(sys.exc_info()[2]) )

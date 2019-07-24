@@ -12,18 +12,29 @@ EXPOSE 8080
 COPY requirements.txt .
 
 RUN apt-get update -y && \
-	apt-get -y install wkhtmltopdf-dbg && \
+	apt-get -y install wget && \
+	apt-get -y install sudo && \
+	apt-get -y install fontconfig && \
+	apt-get -y install libjpeg62-turbo-dev && \
+	apt-get -y install xfonts-base && \
+	apt-get -y install xfonts-75dpi && \
+	apt-get -y install gdebi && \
 	apt-get -y install xvfb && \
 	apt-get -y install python3 && \
 	apt-get -y install python3-pip 
 
 RUN pip3 install -r requirements.txt
 
-RUN chmod 755 /usr/bin/wkhtmltopdf
-RUN chmod 755 /usr/bin/wkhtmltoimage
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb
+RUN dpkg -i wkhtmltox_0.12.5-1.stretch_amd64.deb
+#RUN apt-get install -f
+
+RUN chmod 755 /usr/local/bin/wkhtmltopdf
+RUN chmod 755 /usr/local/bin/wkhtmltoimage
 RUN chmod 777 /app
 
 COPY . .
 
-#CMD tail -f /dev/null
+RUN rm wkhtmltox_0.12.5-1.stretch_amd64.deb
+
 CMD [ "uwsgi", "--ini", "app.ini" ]

@@ -5,7 +5,6 @@ import mysql.connector
 
 app = Flask(__name__)
 
-
 @app.route("/hydrate")
 def read_db_values():
 	user_value = {}
@@ -37,12 +36,8 @@ def read_db_values():
 			"dd_public_dashboard_url" : dd_public_dashboard_url
 		}
 
-	print("$$$$$$")
-	print(user_value['dd_public_dashboard_url'])
-	print("$$$$$$")
+	gen_image = "/usr/bin/xvfb-run -a /usr/local/bin/wkhtmltoimage --javascript-delay 20000 '{}' test.png".format(user_value['dd_public_dashboard_url'])
 
-	gen_image = "/usr/bin/xvfb-run -a /usr/bin/wkhtmltoimage --javascript-delay 20000 '{}' test.png".format(user_value['dd_public_dashboard_url'])
-	print(gen_image)
 	os.system(gen_image)
 
 	return {'data': 'Screenshot taken.'}, 200
