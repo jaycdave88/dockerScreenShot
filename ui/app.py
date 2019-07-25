@@ -10,11 +10,11 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = 'SjdnUends821Jsdlkvxh391ksdODnejdDw'
 
 class ReusableForm(Form):
-    to_addr = TextField('To:')
-    subject = TextField('Subject:')
-    from_addr = TextField('From:')
-    password = TextField('Password:')
-    dd_public_dashboard_url = TextField('Public Dashboard URL:')
+    to_addr = TextField('To:', validators=[validators.required()])
+    subject = TextField('Subject:', validators=[validators.required()])
+    from_addr = TextField('From:', validators=[validators.required()])
+    password = TextField('Password:', validators=[validators.required()])
+    dd_public_dashboard_url = TextField('Public Dashboard URL:', validators=[validators.required()])
 
 def write_to_db(to_addr,subject,from_addr,password,dd_public_dashboard_url) -> List[Dict]:
     config = {
