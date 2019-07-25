@@ -4,13 +4,22 @@
      <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+        body{
+            background:url('https://i.ibb.co/Tw4My9T/Screen-Shot-2019-07-25-at-11-48-24-AM.png') no-repeat center center fixed;
+            -webkit-background-size:cover;
+            -moz-background-size:cover;
+            -o-background-size: cover;
+            background-size: cover;
+      }
 
+     </style>
   </head>
   <body>
 
     <div class="container"><br>
       <center>
-        <h2>Datadog Dashboard Emailer</h2>
+        <h2 style="color: white;">Datadog Dashboard Emailer</h2>
       </center>
     </div>
 
@@ -20,19 +29,19 @@
       <form  action="" method="post" role="form">
         {{ form.csrf }}
         <div class="form-group">
-          <label for="to_address">To:</label>
+          <label style="color: white; for="to_address">To:</label>
           <input type="text" class="form-control" id="to_address" name="to_address" placeholder="john.doe@company.com">
             <br>
-          <label for="subject">Subject:</label>
+          <label style="color: white; for="subject">Subject:</label>
           <input type="text" class="form-control" id="subject" name="subject" placeholder="Datadog - Snapshot">
 	         <br>
-      	  <label for="from_address">From:</label>
+      	  <label style="color: white; for="from_address">From:</label>
       	  <input type="text" class="form-control" id="from_address" name="from_address" placeholder="jane.doe@company.com">
       	    <br>
-      	  <label for="password">Password:</label>
+      	  <label style="color: white; for="password">Password:</label>
       	  <input type="password" class="form-control" id="password" name="password" placeholder="jane.doe@company.com's email password">
             <br>
-          <label for="dd_public_dashboard_url">Public Dashboard URL:</label>
+          <label style="color: white; for="dd_public_dashboard_url">Public Dashboard URL:</label>
           <input type="dd_public_dashboard_url" class="form-control" id="dd_public_dashboard_url" name="dd_public_dashboard_url" placeholder="https://bit.ly/2JCSPvT">
 	      </div>
         <br>													   
