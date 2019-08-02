@@ -27,11 +27,12 @@ RUN pip3 install -r requirements.txt
 
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb
 RUN dpkg -i wkhtmltox_0.12.5-1.stretch_amd64.deb
-#RUN apt-get install -f
+
 
 RUN chmod 755 /usr/local/bin/wkhtmltopdf
 RUN chmod 755 /usr/local/bin/wkhtmltoimage
 RUN chmod 777 /app
+
 
 COPY . .
 

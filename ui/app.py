@@ -10,11 +10,11 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = 'SjdnUends821Jsdlkvxh391ksdODnejdDw'
 
 class ReusableForm(Form):
-    to_addr = TextField('To:', validators=[validators.required()])
-    subject = TextField('Subject:', validators=[validators.required()])
-    from_addr = TextField('From:', validators=[validators.required()])
-    password = TextField('Password:', validators=[validators.required()])
-    dd_public_dashboard_url = TextField('Public Dashboard URL:', validators=[validators.required()])
+    to_addr = TextField('To:')
+    subject = TextField('Subject:')
+    from_addr = TextField('From:')
+    password = TextField('Password:')
+    dd_public_dashboard_url = TextField('Public Dashboard URL:')
 
 def write_to_db(to_addr,subject,from_addr,password,dd_public_dashboard_url) -> List[Dict]:
     config = {
@@ -41,6 +41,7 @@ def startup():
         from_addr=request.form['from_address']
         password=request.form['password']
         dd_public_dashboard_url=request.form['dd_public_dashboard_url']
+
         if form.validate():
             write_to_db(to_addr, subject, from_addr, password, dd_public_dashboard_url)
             stage_2()
@@ -59,6 +60,10 @@ def stage_2():
         raise e
     finally:
         return "okay"
+
+def stage_3():
+    return "still in progress"
+
 
 
 if __name__ == "__main__":
